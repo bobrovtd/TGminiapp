@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-from .auth import verify_telegram_auth
+from auth import verify_telegram_auth
 
 app = FastAPI()
 

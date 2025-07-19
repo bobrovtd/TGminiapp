@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Telegram Mini App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: #eee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        #result {
+            background: #333;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            white-space: pre-wrap;
+        }
+    </style>
+    <script>
+        async function sendAuthData() {
+            try {
+                // Получаем данные пользователя из Telegram Mini App
+                const userData = window.Telegram.WebApp.initDataUnsafe;
+
+                // Отправляем их на backend методом POST
+                const response = await fetch("/auth/telegram", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(userData)
+                });
+
+                const result = await response.json();
+                document.getElementById("result").innerText = JSON.stringify(result, null, 2);
+            } catch (err) {
+                document.getElementById("result").innerText = "Ошибка: " + err;
+            }
+        }
+
+        window.onload = sendAuthData;
+    </script>
+</head>
+<body>
+    <h1>Telegram Mini App</h1>
+    <p>Авторизация через Telegram...</p>
+    <div id="result">Загрузка...</div>
+</body>
+</html>
