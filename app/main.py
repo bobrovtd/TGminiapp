@@ -1,22 +1,22 @@
 from fastapi import FastAPI, Request, HTTPException
-from auth import verify_telegram_auth
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+from .auth import verify_telegram_auth
 
 app = FastAPI()
 
-@app.get("/")
-def read_root():
-    return {"message": "Telegram Mini App Backend is running"}
+# Подключаем папку static для отдачи index.html
+app.mount("/", StaticFiles(directory="app/static", html=True), name="static")
 
 @app.post("/auth/telegram")
-async def telegram_auth(request: Request):
+async def telegram_auth_post(request: Request):
     """
-    Эндпоинт для проверки подписи и возврата данных пользователя.
+    POST-запрос для авторизации пользователя через Telegram.
     """
     data = await request.json()
     if not verify_telegram_auth(data.copy()):
         raise HTTPException(status_code=400, detail="Invalid Telegram signature")
 
-    # Возвращаем приветствие с данными пользователя
     return {
         "status": "ok",
         "message": f"Hello, {data.get('first_name', 'User')}!",
