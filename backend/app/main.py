@@ -6,7 +6,7 @@ from .dependencies import verify_telegram_authentication
 from .config import settings
 
 app = FastAPI(title="Telegram MiniApp Auth")
-app.mount("/", StaticFiles(directory="../frontend", html=True), name="frontend")
+app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
 
 # Настройка CORS для разработки
 app.add_middleware(
