@@ -3,12 +3,11 @@ from fastapi.responses import HTMLResponse, JSONResponse
 import urllib.parse
 import hmac
 import hashlib
-import os
 
 app = FastAPI()
 
 # Ваш токен бота Telegram
-BOT_TOKEN = os.getenv("BOT_TOKEN", "YOUR_BOT_TOKEN_HERE")
+BOT_TOKEN = '7045210026:AAHC9-gvim_AGmCkLx2ZPoNHcR8v0ohXDMM'
 
 def verify_init_data(init_data: str, bot_token: str) -> bool:
     """
