@@ -11,7 +11,7 @@ from pydantic import BaseModel, Field
 
 # --- Конфигурация ---
 # Замените на ваш Bot Token из @BotFather
-BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
+BOT_TOKEN = "7045210026:AAHC9-gvim_AGmCkLx2ZPoNHcR8v0ohXDMM"
 
 # Настройка логирования
 logging.basicConfig(level=logging.INFO)
